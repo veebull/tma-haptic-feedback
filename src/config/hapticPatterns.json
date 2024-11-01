@@ -1,0 +1,411 @@
+{
+  "emotional": {
+    "heartbeat": {
+      "sequence": [
+        { "type": "heavy", "delay": 500 },
+        { "type": "light", "delay": 300 }
+      ],
+      "repeat": 6
+    },
+    "anxiety": {
+      "sequence": [
+        { "type": "soft", "delay": 100 }
+      ],
+      "repeat": 20
+    },
+    "excitement": {
+      "sequence": [
+        { "type": "rigid", "delay": 150 }
+      ],
+      "repeat": 15
+    },
+    "calm": {
+      "sequence": [
+        { "type": "soft", "delay": 800 },
+        { "type": "none", "delay": 400 }
+      ],
+      "repeat": 8
+    },
+    "frustration": {
+      "sequence": [
+        { "type": "rigid", "delay": 100 },
+        { "type": "heavy", "delay": 50 }
+      ],
+      "repeat": 12
+    },
+    "joy": {
+      "sequence": [
+        { "type": "light", "delay": 150 },
+        { "type": "medium", "delay": 150 },
+        { "type": "light", "delay": 150 }
+      ],
+      "repeat": 8
+    },
+    "sadness": {
+      "sequence": [
+        { "type": "soft", "delay": 600 },
+        { "type": "light", "delay": 400 }
+      ],
+      "repeat": 10
+    },
+    "surprise": {
+      "sequence": [
+        { "type": "heavy", "delay": 100 },
+        { "type": "rigid", "delay": 50 },
+        { "type": "medium", "delay": 200 }
+      ],
+      "repeat": 4
+    }
+  },
+  "notification": {
+    "urgentAlert": {
+      "sequence": [
+        { "type": "error", "delay": 200, "isNotification": true }
+      ],
+      "repeat": 3
+    },
+    "gentleReminder": {
+      "sequence": [
+        { "type": "soft", "delay": 500 }
+      ],
+      "repeat": 2
+    },
+    "incoming": {
+      "sequence": [
+        { "type": "light", "delay": 200 },
+        { "type": "medium", "delay": 300 }
+      ],
+      "repeat": 4
+    },
+    "calendar": {
+      "sequence": [
+        { "type": "soft", "delay": 300 },
+        { "type": "light", "delay": 200 },
+        { "type": "soft", "delay": 300 }
+      ],
+      "repeat": 2
+    },
+    "message": {
+      "sequence": [
+        { "type": "medium", "delay": 200 },
+        { "type": "none", "delay": 200 },
+        { "type": "light", "delay": 200 }
+      ],
+      "repeat": 2
+    },
+    "battery": {
+      "sequence": [
+        { "type": "heavy", "delay": 300 },
+        { "type": "light", "delay": 100 }
+      ],
+      "repeat": 3
+    },
+    "update": {
+      "sequence": [
+        { "type": "medium", "delay": 200 },
+        { "type": "light", "delay": 100 },
+        { "type": "medium", "delay": 200 }
+      ],
+      "repeat": 2
+    }
+  },
+  "musical": {
+    "techno": {
+      "sequence": [
+        { "type": "heavy", "delay": 125 },
+        { "type": "light", "delay": 125 },
+        { "type": "medium", "delay": 250 }
+      ],
+      "repeat": 20
+    },
+    "waltz": {
+      "sequence": [
+        { "type": "heavy", "delay": 200 },
+        { "type": "light", "delay": 200 },
+        { "type": "light", "delay": 200 }
+      ],
+      "repeat": 10
+    },
+    "dubstep": {
+      "sequence": [
+        { "type": "heavy", "delay": 100 },
+        { "type": "rigid", "delay": 100 },
+        { "type": "medium", "delay": 50 },
+        { "type": "heavy", "delay": 250 }
+      ],
+      "repeat": 20
+    },
+    "drumAndBass": {
+      "sequence": [
+        { "type": "heavy", "delay": 100 },
+        { "type": "light", "delay": 100 },
+        { "type": "medium", "delay": 200 }
+      ],
+      "repeat": 25
+    }
+  },
+  "gameFeedback": {
+    "powerUp": {
+      "sequence": [
+        { "type": "soft", "delay": 100 },
+        { "type": "light", "delay": 100 },
+        { "type": "medium", "delay": 100 },
+        { "type": "heavy", "delay": 100 },
+        { "type": "rigid", "delay": 100 }
+      ],
+      "repeat": 1
+    },
+    "explosion": {
+      "sequence": [
+        { "type": "heavy", "delay": 0 },
+        { "type": "medium", "delay": 100 }
+      ],
+      "repeat": 5
+    }
+  },
+  "uiFeedback": {
+    "scrollHaptic": {
+      "sequence": [
+        { "type": "light", "delay": 50 }
+      ],
+      "repeat": 3
+    }
+  },
+  "continuous": {
+    "crescendo": {
+      "sequence": [
+        { "type": "soft", "delay": 200 },
+        { "type": "light", "delay": 200 },
+        { "type": "medium", "delay": 200 },
+        { "type": "heavy", "delay": 200 },
+        { "type": "rigid", "delay": 200 }
+      ],
+      "repeat": 10
+    },
+    "intensePulse": {
+      "sequence": [
+        { "type": "heavy", "delay": 200 },
+        { "type": "rigid", "delay": 200 }
+      ],
+      "repeat": 25
+    },
+    "raindrops": {
+      "sequence": [
+        { "type": "soft", "delay": "random:200" }
+      ],
+      "repeat": 50
+    }
+  },
+  "communication": {
+    "morse": {
+      "sequence": [
+        { "type": "light", "delay": 100 },
+        { "type": "light", "delay": 100 },
+        { "type": "light", "delay": 100 },
+        { "type": "none", "delay": 300 },
+        { "type": "heavy", "delay": 300 },
+        { "type": "heavy", "delay": 300 },
+        { "type": "heavy", "delay": 300 },
+        { "type": "none", "delay": 300 }
+      ],
+      "repeat": 3
+    }
+  },
+  "ambient": {
+    "ocean": {
+      "sequence": [
+        { "type": "soft", "delay": 400 },
+        { "type": "light", "delay": 400 },
+        { "type": "medium", "delay": 800 }
+      ],
+      "repeat": 5
+    }
+  },
+  "status": {
+    "processing": {
+      "sequence": [
+        { "type": "soft", "delay": 300 },
+        { "type": "light", "delay": 200 }
+      ],
+      "repeat": 20
+    },
+    "complete": {
+      "sequence": [
+        { "type": "success", "delay": 200, "isNotification": true },
+        { "type": "medium", "delay": 100 },
+        { "type": "heavy", "delay": 0 }
+      ],
+      "repeat": 1
+    }
+  },
+  "exercise": {
+    "startWorkout": {
+      "sequence": [
+        { "type": "heavy", "delay": 300 },
+        { "type": "medium", "delay": 200 },
+        { "type": "heavy", "delay": 300 }
+      ],
+      "repeat": 2
+    },
+    "interval": {
+      "sequence": [
+        { "type": "rigid", "delay": 200 },
+        { "type": "none", "delay": 400 }
+      ],
+      "repeat": 3
+    },
+    "cooldown": {
+      "sequence": [
+        { "type": "medium", "delay": 400 },
+        { "type": "light", "delay": 400 },
+        { "type": "soft", "delay": 400 }
+      ],
+      "repeat": 2
+    }
+  },
+  "navigation": {
+    "turn": {
+      "sequence": [
+        { "type": "medium", "delay": 200 },
+        { "type": "heavy", "delay": 200 }
+      ],
+      "repeat": 3
+    },
+    "arrival": {
+      "sequence": [
+        { "type": "heavy", "delay": 200 },
+        { "type": "medium", "delay": 100 },
+        { "type": "light", "delay": 100 }
+      ],
+      "repeat": 2
+    }
+  },
+  "productivity": {
+    "focus": {
+      "sequence": [
+        { "type": "medium", "delay": 500 }
+      ],
+      "repeat": 3
+    },
+    "break": {
+      "sequence": [
+        { "type": "light", "delay": 200 },
+        { "type": "light", "delay": 200 }
+      ],
+      "repeat": 4
+    }
+  },
+  "weather": {
+    "storm": {
+      "sequence": [
+        { "type": "heavy", "delay": "random:400" },
+        { "type": "rigid", "delay": "random:200" }
+      ],
+      "repeat": 15
+    },
+    "sunshine": {
+      "sequence": [
+        { "type": "soft", "delay": 300 },
+        { "type": "light", "delay": 300 }
+      ],
+      "repeat": 6
+    }
+  },
+  "social": {
+    "like": {
+      "sequence": [
+        { "type": "light", "delay": 100 },
+        { "type": "medium", "delay": 200 }
+      ],
+      "repeat": 2
+    },
+    "share": {
+      "sequence": [
+        { "type": "medium", "delay": 200 },
+        { "type": "light", "delay": 100 },
+        { "type": "medium", "delay": 200 }
+      ],
+      "repeat": 2
+    }
+  },
+  "vehicles": {
+    "engineStart": {
+      "sequence": [
+        { "type": "heavy", "delay": 100 },
+        { "type": "rigid", "delay": 200 },
+        { "type": "heavy", "delay": 300 }
+      ],
+      "repeat": 2
+    },
+    "engineIdle": {
+      "sequence": [
+        { "type": "soft", "delay": 200 },
+        { "type": "light", "delay": 200 }
+      ],
+      "repeat": 8
+    },
+    "acceleration": {
+      "sequence": [
+        { "type": "medium", "delay": 100 },
+        { "type": "heavy", "delay": 150 },
+        { "type": "rigid", "delay": 200 }
+      ],
+      "repeat": 4
+    },
+    "drift": {
+      "sequence": [
+        { "type": "rigid", "delay": "random:300" },
+        { "type": "heavy", "delay": 100 },
+        { "type": "medium", "delay": "random:200" }
+      ],
+      "repeat": 6
+    },
+    "braking": {
+      "sequence": [
+        { "type": "heavy", "delay": 100 },
+        { "type": "rigid", "delay": 200 },
+        { "type": "medium", "delay": 300 }
+      ],
+      "repeat": 2
+    },
+    "gearShift": {
+      "sequence": [
+        { "type": "rigid", "delay": 100 },
+        { "type": "medium", "delay": 200 }
+      ],
+      "repeat": 1
+    },
+    "roughRoad": {
+      "sequence": [
+        { "type": "medium", "delay": "random:200" },
+        { "type": "rigid", "delay": "random:300" }
+      ],
+      "repeat": 8
+    },
+    "speedBump": {
+      "sequence": [
+        { "type": "light", "delay": 100 },
+        { "type": "heavy", "delay": 200 },
+        { "type": "medium", "delay": 300 }
+      ],
+      "repeat": 1
+    },
+    "engineRevving": {
+      "sequence": [
+        { "type": "medium", "delay": 50 },
+        { "type": "heavy", "delay": 100 },
+        { "type": "rigid", "delay": 150 }
+      ],
+      "repeat": 5
+    },
+    "turboBoost": {
+      "sequence": [
+        { "type": "medium", "delay": 100 },
+        { "type": "heavy", "delay": 150 },
+        { "type": "rigid", "delay": 200 },
+        { "type": "heavy", "delay": 150 }
+      ],
+      "repeat": 3
+    }
+  }
+} 
