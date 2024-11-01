@@ -80,15 +80,20 @@ const singleImpactButtons = [
 ] as const;
 
 function App() {
-  const [isTWA, setIsTWA] = useState(true);
+  const [isMobileTWA, setIsMobileTWA] = useState(true);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
+    // Check if user is on mobile browser
+    const userAgent = navigator.userAgent.toLowerCase();
+    const isMobileDevice = /iphone|ipad|ipod|android/.test(userAgent);
+    setIsMobile(isMobileDevice);
+
     // Check if we're running in TWA mode and on mobile
     console.log('WEBAPP.READY', WebApp.ready());
-    setIsTWA(
+    setIsMobileTWA(
       WebApp.ready() !== undefined &&
-        WebApp.platform !== 'unknown' &&
-        WebApp.platform !== 'ios' && WebApp.platform !== 'android_x'
+        (WebApp.platform === 'android' || WebApp.platform === 'ios')
     );
   }, []);
 
@@ -202,7 +207,7 @@ function App() {
           <span className='text-sm font-medium'>GitHub</span>
         </a>
 
-        {!isTWA && (
+        {!isMobileTWA && !isMobile && (
           <div className='flex flex-col items-center gap-2 p-4 bg-gray-100 dark:bg-gray-800 rounded-lg'>
             <p className='text-sm text-gray-600 dark:text-gray-400'>
               For full haptic feedback functionality, please open this page in
