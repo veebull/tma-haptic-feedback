@@ -209,9 +209,12 @@ function App() {
 
         {!isMobileTWA && !isMobile && (
           <div className='flex flex-col items-center gap-2 p-4 bg-gray-100 dark:bg-gray-800 rounded-lg'>
+            <p className='text-xl text-black dark:text-white font-black'>
+              Haptic feedback works only in iOS and Android devices.
+            </p>
             <p className='text-sm text-gray-600 dark:text-gray-400'>
               For full haptic feedback functionality, please open this page in
-              the Telegram Mobile App
+              the Telegram <b>Mobile</b> App
             </p>
             <QRCode
               value='https://t.me/supertmabot/haptic'
