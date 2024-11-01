@@ -85,7 +85,11 @@ function App() {
   useEffect(() => {
     // Check if we're running in TWA mode and on mobile
     console.log('WEBAPP.READY', WebApp.ready());
-    setIsTWA(WebApp.ready() !== undefined && WebApp.platform !== 'unknown');
+    setIsTWA(
+      WebApp.ready() !== undefined &&
+        WebApp.platform !== 'unknown' &&
+        WebApp.platform !== 'ios' && WebApp.platform !== 'android_x'
+    );
   }, []);
 
   // Use a ref to store the cleanup function of the current haptic sequence
