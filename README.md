@@ -35,7 +35,7 @@ This is a demonstration project showcasing haptic feedback capabilities in Teleg
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/tma-haptic-feedback.git
+git clone https://github.com/veebull/tma-haptic-feedback.git
 cd tma-haptic-feedback
 
 # Install dependencies using npm
