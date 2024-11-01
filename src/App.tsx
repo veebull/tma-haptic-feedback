@@ -28,11 +28,36 @@ type HapticPattern = {
 
 // Single impact button configuration
 const singleImpactButtons = [
-  { name: 'Light Impact', type: 'light', variant: 'outline', isNotification: false },
-  { name: 'Medium Impact', type: 'medium', variant: 'outline', isNotification: false },
-  { name: 'Heavy Impact', type: 'heavy', variant: 'outline', isNotification: false },
-  { name: 'Rigid Impact', type: 'rigid', variant: 'outline', isNotification: false },
-  { name: 'Soft Impact', type: 'soft', variant: 'outline', isNotification: false },
+  {
+    name: 'Light Impact',
+    type: 'light',
+    variant: 'outline',
+    isNotification: false,
+  },
+  {
+    name: 'Medium Impact',
+    type: 'medium',
+    variant: 'outline',
+    isNotification: false,
+  },
+  {
+    name: 'Heavy Impact',
+    type: 'heavy',
+    variant: 'outline',
+    isNotification: false,
+  },
+  {
+    name: 'Rigid Impact',
+    type: 'rigid',
+    variant: 'outline',
+    isNotification: false,
+  },
+  {
+    name: 'Soft Impact',
+    type: 'soft',
+    variant: 'outline',
+    isNotification: false,
+  },
   {
     name: 'Error Notification',
     type: 'error',
@@ -58,9 +83,9 @@ function App() {
   const [isTWA, setIsTWA] = useState(true);
 
   useEffect(() => {
-    // Check if we're running in TWA mode
+    // Check if we're running in TWA mode and on mobile
     console.log('WEBAPP.READY', WebApp.ready());
-    setIsTWA(WebApp.ready() !== undefined);
+    setIsTWA(WebApp.ready() !== undefined && WebApp.platform !== 'unknown');
   }, []);
 
   // Use a ref to store the cleanup function of the current haptic sequence
