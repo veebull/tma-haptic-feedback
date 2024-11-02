@@ -1,5 +1,5 @@
 import { motion, useAnimationControls } from 'framer-motion';
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 
 interface HapticStep {
   type: string;
@@ -19,30 +19,30 @@ interface HapticButtonProps {
   onClick: () => void;
 }
 
-const getIntensityScale = (type: string) => {
-  switch (type) {
-    case 'heavy':
-      return 1.3;
-    case 'rigid':
-      return 1.25;
-    case 'medium':
-      return 1.2;
-    case 'light':
-      return 1.15;
-    case 'soft':
-      return 1.1;
-    case 'error':
-      return 1.4;
-    case 'success':
-      return 1.3;
-    case 'warning':
-      return 1.35;
-    case 'none':
-      return 1;
-    default:
-      return 1;
-  }
-};
+// const getIntensityScale = (type: string) => {
+//   switch (type) {
+//     case 'heavy':
+//       return 1.3;
+//     case 'rigid':
+//       return 1.25;
+//     case 'medium':
+//       return 1.2;
+//     case 'light':
+//       return 1.15;
+//     case 'soft':
+//       return 1.1;
+//     case 'error':
+//       return 1.4;
+//     case 'success':
+//       return 1.3;
+//     case 'warning':
+//       return 1.35;
+//     case 'none':
+//       return 1;
+//     default:
+//       return 1;
+//   }
+// };
 
 const getTypeColor = (type: string) => {
   switch (type) {
@@ -206,7 +206,12 @@ export function HapticButton({
               -getRotateIntensity(step.type),
               0,
             ],
-            scale: [1, getScaleIntensity(step.type), getScaleIntensity(step.type), 1],
+            scale: [
+              1,
+              getScaleIntensity(step.type),
+              getScaleIntensity(step.type),
+              1,
+            ],
             backgroundColor: getTypeColor(step.type),
             transition: {
               duration: delay / 1000,
