@@ -1,3 +1,4 @@
+import { motion, useAnimation } from 'framer-motion';
 import { useRef, useCallback, useEffect, useState } from 'react';
 import './App.css';
 import WebApp from '@twa-dev/sdk';
@@ -5,6 +6,8 @@ import { Button } from './components/ui/button';
 import hapticPatterns from './config/hapticPatterns.json';
 import { Github } from 'lucide-react';
 import QRCode from 'react-qr-code';
+import { HapticButton } from './components/HapticButton';
+
 // Types for better type safety
 type HapticType =
   | 'light'
@@ -16,11 +19,13 @@ type HapticType =
   | 'success'
   | 'warning'
   | 'none';
+
 type HapticStep = {
   type: HapticType;
   delay: number | string;
   isNotification?: boolean;
 };
+
 type HapticPattern = {
   sequence: HapticStep[];
   repeat: number;
@@ -83,13 +88,88 @@ function App() {
   const [isMobileTWA, setIsMobileTWA] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
 
+  const buttonControls = useRef(Array(singleImpactButtons.length).fill(null).map(() => useAnimation()));
+
+  const getShakeIntensity = (type: string) => {
+    switch (type) {
+      case 'heavy':
+        return 8;
+      case 'rigid':
+        return 6;
+      case 'medium':
+        return 4;
+      case 'light':
+        return 2;
+      case 'soft':
+        return 1;
+      case 'error':
+        return 10;
+      case 'success':
+        return 6;
+      case 'warning':
+        return 8;
+      case 'selection':
+        return 3;
+      default:
+        return 0;
+    }
+  };
+
+  const getRotateIntensity = (type: string) => {
+    switch (type) {
+      case 'heavy':
+        return 3;
+      case 'rigid':
+        return 2;
+      case 'medium':
+        return 1.5;
+      case 'light':
+        return 1;
+      case 'soft':
+        return 0.5;
+      case 'error':
+        return 4;
+      case 'success':
+        return 2;
+      case 'warning':
+        return 3;
+      case 'selection':
+        return 1;
+      default:
+        return 0;
+    }
+  };
+
+  const getScaleIntensity = (type: string) => {
+    switch (type) {
+      case 'heavy':
+        return 1.15;
+      case 'rigid':
+        return 1.12;
+      case 'medium':
+        return 1.1;
+      case 'light':
+        return 1.08;
+      case 'soft':
+        return 1.05;
+      case 'error':
+        return 1.2;
+      case 'success':
+        return 1.15;
+      case 'warning':
+        return 1.18;
+      case 'selection':
+        return 1.08;
+      default:
+        return 1;
+    }
+  };
+
   useEffect(() => {
-    // Check if user is on mobile browser
     const userAgent = navigator.userAgent.toLowerCase();
     const isMobileDevice = /iphone|ipad|ipod|android/.test(userAgent);
     setIsMobile(isMobileDevice);
 
-    // Check if we're running in TWA mode and on mobile
     console.log('WEBAPP.READY', WebApp.ready());
     setIsMobileTWA(
       WebApp.ready() !== undefined &&
@@ -97,7 +177,6 @@ function App() {
     );
   }, []);
 
-  // Use a ref to store the cleanup function of the current haptic sequence
   const cleanupRef = useRef<(() => void) | null>(null);
 
   const stopCurrentHaptic = useCallback(() => {
@@ -108,11 +187,9 @@ function App() {
   }, []);
 
   const executeHapticSequence = async (pattern: HapticPattern) => {
-    // Stop any currently playing sequence
     stopCurrentHaptic();
 
     let isPlaying = true;
-    // Store the cleanup function
     cleanupRef.current = () => {
       isPlaying = false;
     };
@@ -154,10 +231,10 @@ function App() {
     }
   };
 
-  const handleSingleImpact = (button: (typeof singleImpactButtons)[number]) => {
-    // Stop any currently playing sequence
-    stopCurrentHaptic();
-
+  const handleSingleImpact = async (button: (typeof singleImpactButtons)[number], index: number) => {
+    const controls = buttonControls.current[index];
+    
+    // Trigger haptic feedback
     if (button.type === 'selection') {
       WebApp.HapticFeedback.selectionChanged();
     } else if (button.isNotification) {
@@ -166,15 +243,48 @@ function App() {
       );
     } else {
       WebApp.HapticFeedback.impactOccurred(
-        button.type as Exclude<
-          HapticType,
-          'error' | 'success' | 'warning' | 'none'
-        >
+        button.type as Exclude<HapticType, 'error' | 'success' | 'warning' | 'none'>
       );
     }
+
+    // Animate the button
+    await controls.start({
+      x: [0, getShakeIntensity(button.type), -getShakeIntensity(button.type), 0],
+      rotate: [0, getRotateIntensity(button.type), -getRotateIntensity(button.type), 0],
+      scale: [1, getScaleIntensity(button.type), getScaleIntensity(button.type), 1],
+      transition: {
+        duration: 0.3,
+        ease: "easeInOut",
+        x: {
+          duration: 0.3,
+          times: [0, 0.2, 0.8, 1],
+          ease: "easeInOut"
+        },
+        rotate: {
+          duration: 0.3,
+          times: [0, 0.2, 0.8, 1],
+          ease: "easeInOut"
+        },
+        scale: {
+          duration: 0.3,
+          times: [0, 0.2, 0.8, 1],
+          ease: "easeInOut"
+        }
+      }
+    });
+
+    // Reset to initial state
+    await controls.start({
+      x: 0,
+      rotate: 0,
+      scale: 1,
+      transition: {
+        duration: 0.2,
+        ease: "easeOut"
+      }
+    });
   };
 
-  // Create a flat map of all patterns for easier access
   const hapticSequences = Object.entries(hapticPatterns).reduce(
     (acc, [category, patterns]) => {
       Object.entries(patterns).forEach(([name, pattern]) => {
@@ -193,6 +303,18 @@ function App() {
       { name: string; category: string; execute: () => void }
     >
   );
+
+  const renderHapticPatternButton = (key: string, pattern: any, name: string, category: string) => {
+    return (
+      <HapticButton
+        key={key}
+        pattern={pattern}
+        name={name}
+        category={category}
+        onClick={() => hapticSequences[`${category}_${name}`].execute()}
+      />
+    );
+  };
 
   return (
     <>
@@ -239,32 +361,38 @@ function App() {
 
       <h2 className='text-2xl font-semibold mb-2'>Single Haptic Impacts</h2>
       <div className='grid grid-cols-2 gap-2 w-full mb-4'>
-        {singleImpactButtons.map((button) => (
-          <Button
+        {singleImpactButtons.map((button, index) => (
+          <motion.div
             key={button.name}
-            variant={button.variant}
-            onClick={() => handleSingleImpact(button)}
+            initial={{ x: 0, rotate: 0, scale: 1 }}
+            animate={buttonControls.current[index]}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
           >
-            {button.name}
-          </Button>
+            <Button
+              variant={button.variant}
+              onClick={() => handleSingleImpact(button, index)}
+              className="w-full"
+            >
+              {button.name}
+            </Button>
+          </motion.div>
         ))}
       </div>
 
       <h2 className='text-2xl font-semibold mb-2'>Haptic Sequences</h2>
-      {Object.entries(hapticPatterns).map(([category, _]) => (
-        <div key={category} className='mb-4'>
-          <h4 className='text-lg font-semibold capitalize mb-2'>{category}</h4>
-          <div className='grid grid-cols-2 gap-2'>
-            {Object.entries(hapticSequences)
-              .filter(([key]) => key.startsWith(category))
-              .map(([key, { name, execute }]) => (
-                <Button key={key} variant='outline' onClick={execute}>
-                  {name.charAt(0).toUpperCase() + name.slice(1)}
-                </Button>
-              ))}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
+        {Object.entries(hapticPatterns).map(([category, patterns]) => (
+          <div key={category} className="space-y-4">
+            <h3 className="text-xl font-bold capitalize">{category}</h3>
+            <div className="grid gap-4">
+              {Object.entries(patterns).map(([name, pattern]) => 
+                renderHapticPatternButton(`${category}_${name}`, pattern, name, category)
+              )}
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </>
   );
 }

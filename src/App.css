@@ -45,6 +45,7 @@
 }
 button {
   padding: 1em 0.5em;
+  outline: none;
 }
 
 @media (max-width: 768px) {
@@ -61,5 +62,72 @@ button {
     width: 100%;
     padding: 1em 0.5em;
     font-size: 0.9rem;
+  }
+}
+
+haptic-animation-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.05);
+  min-height: 120px;
+}
+.haptic-particle {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+.pattern-card {
+  position: relative;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+.pattern-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+.category-emotional {
+  background: linear-gradient(135deg, #ff6b6b, #ffd93d);
+}
+.category-notification {
+  background: linear-gradient(135deg, #4facfe, #00f2fe);
+}
+.category-musical {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+}
+.category-gameFeedback {
+  background: linear-gradient(135deg, #ff0844, #ffb199);
+}
+.category-continuous {
+  background: linear-gradient(135deg, #30cfd0, #330867);
+}
+.category-vehicles {
+  background: linear-gradient(135deg, #f43b47, #453a94);
+}
+
+.haptic-button {
+  isolation: isolate;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.button-content {
+  z-index: 2;
+  position: relative;
+}
+
+/* Particle glow effect */
+@supports (backdrop-filter: blur(4px)) {
+  .haptic-button > div:not(.button-content) {
+    backdrop-filter: blur(4px);
+    box-shadow: 0 0 8px currentColor;
+  }
+}
+
+/* Fallback for browsers that don't support backdrop-filter */
+@supports not (backdrop-filter: blur(4px)) {
+  .haptic-button > div:not(.button-content) {
+    filter: blur(1px);
+    box-shadow: 0 0 4px currentColor;
   }
 }
